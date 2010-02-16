@@ -263,7 +263,7 @@ auth_method: internal
 ## Authentication using PAM
 ##
 ## auth_method: pam
-## pam_service: "pamservicename"
+## pam_service: "ejabberd"
 
 ##
 ## Authentication using LDAP
