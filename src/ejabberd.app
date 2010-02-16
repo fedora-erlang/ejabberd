@@ -105,6 +105,7 @@
 	     mod_vcard_ldap,
 	     mod_vcard_odbc,
 	     mod_version,
+             mod_admin_extra,
 	     node_buddy,
 	     node_club,
 	     node_default,
