@@ -70,6 +70,7 @@
 	     mod_caps,
 	     mod_configure2,
 	     mod_configure,
+	     mod_ctlextra,
 	     mod_disco,
 	     mod_echo,
 	     mod_http_bind,
