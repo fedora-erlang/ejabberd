@@ -22,7 +22,7 @@ if [ "$INSTALLUSER" != "" ] ; then
     EXEC_CMD="false"
     for GID in `id -G`; do
         if [ $GID -eq 0 ] ; then
-            EXEC_CMD="su $INSTALLUSER -p -c"
+            EXEC_CMD="/sbin/runuser -s /bin/bash -p ejabberd -c"
         fi
     done
     if [ `id -g` -eq `id -g $INSTALLUSER` ] ; then
