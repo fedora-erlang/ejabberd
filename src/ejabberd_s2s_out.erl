@@ -93,7 +93,7 @@
 						 [From, Host, Type])).
 -endif.
 
--define(FSMTIMEOUT, 30000).
+-define(FSMTIMEOUT, 60000).
 
 %% We do not block on send anymore.
 -define(TCP_SEND_TIMEOUT, 15000).
@@ -245,7 +245,8 @@ open_socket(init, StateData) ->
 		    NewStateData = StateData#state{bridge={Mod, Fun}},
 		    {next_state, relay_to_bridge, NewStateData};
 		_ ->
-		    wait_before_reconnect(StateData)
+		    %%wait_before_reconnect(StateData)
+		    {stop, normal, StateData}
 	    end
     end;
 open_socket(closed, StateData) ->
