@@ -30,19 +30,39 @@
 -export([start/0,
 	 register_mechanism/3,
 	 listmech/1,
-	 server_new/7,
+	 server_new/8,
 	 server_start/3,
 	 server_step/2]).
 
+-include("cyrsasl.hrl").
+-include("ejabberd.hrl").
+
+%% @type saslmechanism() = {sasl_mechanism, Mechanism, Module, Require_Plain}
+%%     Mechanism = string()
+%%     Module = atom()
+%%     Require_Plain = bool().
+%% Registry entry of a supported SASL mechanism.
+
 -record(sasl_mechanism, {mechanism, module, require_plain_password}).
--record(sasl_state, {service, myname, realm,
-		     get_password, check_password, check_password_digest,
-		     mech_mod, mech_state}).
+
+%% @type saslstate() = {sasl_state, Service, Myname, Realm, GetPassword, CheckPassword, CheckPasswordDigest, Mech_Mod, Mech_State}
+%%     Service = string()
+%%     Myname = string()
+%%     Realm = string()
+%%     GetPassword = function()
+%%     CheckPassword = function()
+%%     CheckPasswordDigest = any()
+%%     Mech_Mod = atom()
+%%     Mech_State = term().
+%% State of this process.
+
+-record(sasl_state, {service, myname,
+		     mech_mod, mech_state, params}).
 
 -export([behaviour_info/1]).
 
 behaviour_info(callbacks) ->
-    [{mech_new, 4}, {mech_step, 2}];
+    [{mech_new, 1}, {mech_step, 2}];
 behaviour_info(_Other) ->
     undefined.
 
@@ -53,7 +73,29 @@ start() ->
     cyrsasl_plain:start([]),
     cyrsasl_digest:start([]),
     cyrsasl_anonymous:start([]),
+    maybe_try_start_gssapi(),
     ok.
+
+maybe_try_start_gssapi() ->
+    case os:getenv("KRB5_KTNAME") of
+        false ->
+	    ok;
+        _String ->
+	    try_start_gssapi()
+    end.
+
+try_start_gssapi() ->
+    case code:load_file(esasl) of
+	{module, _Module} ->
+	    cyrsasl_gssapi:start([]);
+	{error, What} ->
+	    ?ERROR_MSG("Support for GSSAPI not started because esasl.beam was not found: ~p", [What])
+    end.
+
+%% @spec (Mechanism, Module, Require_Plain) -> true
+%%     Mechanism = string()
+%%     Module = atom()
+%%     Require_Plain = bool()
 
 register_mechanism(Mechanism, Module, RequirePlainPassword) ->
     ets:insert(sasl_mechanism,
@@ -113,24 +155,28 @@ listmech(Host) ->
     filter_anonymous(Host, Mechs).
 
 server_new(Service, ServerFQDN, UserRealm, _SecFlags,
-	   GetPassword, CheckPassword, CheckPasswordDigest) ->
+	   GetPassword, CheckPassword, CheckPasswordDigest, Socket) ->
+    Params = #sasl_params{
+      host = ServerFQDN,
+      realm = UserRealm,
+      get_password = GetPassword,
+      check_password = CheckPassword,
+      check_password_digest= CheckPasswordDigest,
+      socket = Socket
+     },
+
     #sasl_state{service = Service,
 		myname = ServerFQDN,
-		realm = UserRealm,
-		get_password = GetPassword,
-		check_password = CheckPassword,
-		check_password_digest= CheckPasswordDigest}.
+		params = Params}.
+
 
 server_start(State, Mech, ClientIn) ->
     case lists:member(Mech, listmech(State#sasl_state.myname)) of
 	true ->
 	    case ets:lookup(sasl_mechanism, Mech) of
 		[#sasl_mechanism{module = Module}] ->
-		    {ok, MechState} = Module:mech_new(
-					State#sasl_state.myname,
-					State#sasl_state.get_password,
-					State#sasl_state.check_password,
-					State#sasl_state.check_password_digest),
+		    {ok, MechState} =
+			Module:mech_new(State#sasl_state.params),
 		    server_step(State#sasl_state{mech_mod = Module,
 						 mech_state = MechState},
 				ClientIn);
