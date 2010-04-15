@@ -305,9 +305,16 @@ wait_for_stream({xmlstreamstart, _Name, Attrs}, StateData) ->
 			    send_header(StateData, Server, "1.0", DefaultLang),
 			    case StateData#state.authenticated of
 				false ->
+				    Realm =
+					case ejabberd_config:get_local_option({sasl_realm, Server}) of
+					    undefined ->
+						"";
+					    Realm0 ->
+						Realm0
+					end,
 				    SASLState =
 					cyrsasl:server_new(
-					  "jabber", Server, "", [],
+					  "jabber", Server, Realm, [],
 					  fun(U) ->
 						  ejabberd_auth:get_password_with_authmodule(
 						    U, Server)
@@ -319,7 +326,8 @@ wait_for_stream({xmlstreamstart, _Name, Attrs}, StateData) ->
 					  fun(U, P, D, DG) ->
 						  ejabberd_auth:check_password_with_authmodule(
 						    U, Server, P, D, DG)
-					  end),
+					  end,
+					  StateData#state.socket),
 				    Mechs = lists:map(
 					      fun(S) ->
 						      {xmlelement, "mechanism", [],
