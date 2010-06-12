@@ -236,7 +236,7 @@ install: all
 	#
 	# Binary system libraries
 	install -d $(SODIR)
-	install -m 644 *.so $(SODIR)
+	install -m 755 *.so $(SODIR)
 	#
 	# Translated strings
 	install -d $(MSGSDIR)
