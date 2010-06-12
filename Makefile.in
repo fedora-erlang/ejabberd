@@ -156,7 +156,7 @@ install: all
 	#
 	# Binary system libraries
 	$(INSTALL) -d $(SODIR)
-	$(INSTALL) -m 644 $(DLLs) $(SODIR)
+	$(INSTALL) -m 755 $(DLLs) $(SODIR)
 	#
 	# Translated strings
 	$(INSTALL) -d $(MSGSDIR)
