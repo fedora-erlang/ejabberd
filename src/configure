@@ -560,8 +560,8 @@ MAKEFLAGS=
 # Identity of this package.
 PACKAGE_NAME='ejabberd'
 PACKAGE_TARNAME='ejabberd'
-PACKAGE_VERSION='2.1.x'
-PACKAGE_STRING='ejabberd 2.1.x'
+PACKAGE_VERSION='2.1.9'
+PACKAGE_STRING='ejabberd 2.1.9'
 PACKAGE_BUGREPORT='ejabberd@process-one.net'
 PACKAGE_URL=''
 
