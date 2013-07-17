@@ -11,8 +11,8 @@ DESTDIR =
 # /etc/ejabberd/
 ETCDIR = $(DESTDIR)@sysconfdir@/ejabberd
 
-# /sbin/
-SBINDIR = $(DESTDIR)@sbindir@
+# /bin/
+BINDIR = $(DESTDIR)@bindir@
 
 # /lib/ejabberd/
 EJABBERDDIR = $(DESTDIR)@libdir@/ejabberd
@@ -126,11 +126,11 @@ install: all
 	$(INSTALL) -b -m 644 $(G_USER) inetrc $(ETCDIR)/inetrc
 	#
 	# Administration script
-	[ -d $(SBINDIR) ] || $(INSTALL) -d -m 755 $(SBINDIR)
-	$(INSTALL) -m 755 $(G_USER) ejabberdctl.example $(SBINDIR)/ejabberdctl
+	[ -d $(BINDIR) ] || $(INSTALL) -d -m 755 $(BINDIR)
+	$(INSTALL) -m 755 $(G_USER) ejabberdctl.example $(BINDIR)/ejabberdctl
 	#
 	# Init script
-	$(SED) -e "s*@ctlscriptpath@*$(SBINDIR)*" \
+	$(SED) -e "s*@ctlscriptpath@*$(BINDIR)*" \
 		-e "s*@installuser@*$(INIT_USER)*" ejabberd.init.template \
 		> ejabberd.init
 	chmod 755 ejabberd.init
@@ -191,7 +191,7 @@ install: all
 uninstall: uninstall-binary
 
 uninstall-binary:
-	rm -f  $(SBINDIR)/ejabberdctl
+	rm -f  $(BINDIR)/ejabberdctl
 	rm -fr $(DOCDIR)
 	rm -f  $(BEAMDIR)/*.beam
 	rm -f  $(BEAMDIR)/*.app
