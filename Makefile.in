@@ -127,7 +127,7 @@ install: all
 	#
 	# Administration script
 	[ -d $(SBINDIR) ] || $(INSTALL) -d -m 755 $(SBINDIR)
-	$(INSTALL) -m 550 $(G_USER) ejabberdctl.example $(SBINDIR)/ejabberdctl
+	$(INSTALL) -m 755 $(G_USER) ejabberdctl.example $(SBINDIR)/ejabberdctl
 	#
 	# Init script
 	$(SED) -e "s*@ctlscriptpath@*$(SBINDIR)*" \
