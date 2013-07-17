@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/pkexec /bin/sh
 
 # define default configuration
 POLL=true
