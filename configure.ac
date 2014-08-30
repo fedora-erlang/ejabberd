@@ -3,8 +3,6 @@
 
 AC_PREREQ(2.53)
 AC_INIT(ejabberd, m4_esyscmd([echo `git describe --tags 2>/dev/null || echo community` | sed 's/-g.*//' | tr -d '\012']), [ejabberd@process-one.net], [ejabberd])
-REQUIRE_ERLANG_MIN="5.9.1 (Erlang/OTP R15B01)"
-REQUIRE_ERLANG_MAX="9.0.0 (No Max)"
 
 # Checks for programs.
 AC_PROG_MAKE_SET
@@ -31,18 +29,6 @@ AC_PATH_TOOL(ERLC, erlc, , [${extra_erl_path}$PATH])
 
 AC_ERLANG_NEED_ERL
 AC_ERLANG_NEED_ERLC
-
-AC_ARG_ENABLE(erlang-version-check,
-[AC_HELP_STRING([--enable-erlang-version-check],
-	[Check Erlang/OTP version @<:@default=yes@:>@])])
-case "$enable_erlang_version_check" in
-	yes|'')
-		ERLANG_VERSION_CHECK([$REQUIRE_ERLANG_MIN],[$REQUIRE_ERLANG_MAX])
-		;;
-	no)
-		ERLANG_VERSION_CHECK([$REQUIRE_ERLANG_MIN],[$REQUIRE_ERLANG_MAX],[warn])
-		;;
-esac
 
 # Checks and sets ERLANG_ROOT_DIR and ERLANG_LIB_DIR variable
 AC_ERLANG_SUBST_ROOT_DIR
