@@ -74,19 +74,9 @@ else
   INIT_USER=$(INSTALLUSER)
 endif
 
-all: deps src
+all: src
 
-deps: deps/.got
-
-deps/.got:
-	rm -rf deps/.got
-	rm -rf deps/.built
-	$(REBAR) get-deps && :> deps/.got
-
-deps/.built: deps/.got
-	$(REBAR) compile && :> deps/.built
-
-src: deps/.built
+src:
 	$(REBAR) skip_deps=true compile
 
 update:
@@ -134,7 +124,7 @@ $(call TO_DEST,deps/p1_pam/priv/bin/epam): $(LIBDIR)/%: deps/% $(call TO_DEST,de
 
 copy-files: $(call TO_DEST,$(DEPS_FILES) $(MAIN_FILES))
 
-install: all copy-files
+install: copy-files
 	#
 	# Configuration files
 	$(INSTALL) -d -m 750 $(G_USER) $(ETCDIR)
