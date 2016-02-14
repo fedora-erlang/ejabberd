@@ -63,8 +63,7 @@ Deps = [{p1_cache_tab, ".*", {git, "https://github.com/processone/cache_tab", "f
         {p1_yaml, ".*", {git, "https://github.com/processone/p1_yaml", "79f756ba73a235c4d3836ec07b5f7f2b55f49638"}},
         {p1_utils, ".*", {git, "https://github.com/processone/p1_utils", "d7800881e6702723ce58b7646b60c9e4cd25d563"}},
         {jiffy, ".*", {git, "https://github.com/davisp/jiffy", "cfc61a2e952dc3182e0f9b1473467563699992e2"}},
-        {oauth2, ".*", {git, "https://github.com/prefiks/oauth2.git", "e6da9912e5d8f658e7e868f41a102d085bdbef59"}},
-        {xmlrpc, ".*", {git, "https://github.com/rds13/xmlrpc.git", "42e6e96a0fe7106830274feed915125feb1056f3"}}],
+        {oauth2, ".*", {git, "https://github.com/prefiks/oauth2.git", "e6da9912e5d8f658e7e868f41a102d085bdbef59"}}],
 
 CFLags = proplists:get_value(cflags, Cfg, ""),
 CPPFLags = proplists:get_value(cppflags, Cfg, ""),

@@ -20,5 +20,4 @@
   "p1_yaml": {:git, "https://github.com/processone/p1_yaml", "79f756ba73a235c4d3836ec07b5f7f2b55f49638", []},
   "p1_zlib": {:git, "https://github.com/processone/zlib", "e3d4222b7aae616d7ef2e7e2fa0bbf451516c602", []},
   "providers": {:hex, :providers, "1.4.1"},
-  "relx": {:hex, :relx, "3.5.0"},
-  "xmlrpc": {:git, "https://github.com/rds13/xmlrpc.git", "42e6e96a0fe7106830274feed915125feb1056f3", []}}
+  "relx": {:hex, :relx, "3.5.0"}}

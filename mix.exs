@@ -20,7 +20,7 @@ defmodule Ejabberd.Mixfile do
      included_applications: [:p1_logger, :p1_yaml, :p1_tls, :p1_xml,
                              :p1_stringprep, :p1_zlib, :p1_cache_tab,
                              :mnesia, :p1_utils, :p1_iconv, :esip, :p1_stun,
-                             :p1_mysql, :p1_pgsql, :eredis, :oauth2, :xmlrpc]]
+                             :p1_mysql, :p1_pgsql, :eredis, :oauth2]]
   end
 
   defp erlc_options do
@@ -45,7 +45,6 @@ defmodule Ejabberd.Mixfile do
      {:p1_pgsql, git: "https://github.com/processone/pgsql"},
      {:eredis, git: "https://github.com/wooga/eredis"},
      {:oauth2, git: "https://github.com/prefiks/oauth2.git"},
-     {:xmlrpc, git: "https://github.com/rds13/xmlrpc.git"},
      {:exrm, "~> 0.19.2"}]
   end
 
