@@ -20,7 +20,7 @@ defmodule Ejabberd.Mixfile do
      included_applications: [:lager, :p1_utils, :cache_tab,
                              :p1_tls, :p1_stringprep, :p1_xml,
                              :p1_stun, :p1_yaml, :p1_zlib, :p1_iconv,
-                             :esip, :jiffy, :oauth2, :xmlrpc, :eredis,
+                             :esip, :jiffy, :oauth2, :eredis,
                              :p1_mysql, :p1_pgsql, :sqlite3]]
   end
 
@@ -42,7 +42,6 @@ defmodule Ejabberd.Mixfile do
      {:p1_yaml, git: "https://github.com/processone/p1_yaml", tag: "1.0.0"},
      {:jiffy, git: "https://github.com/davisp/jiffy", tag: "0.14.5"},
      {:oauth2, git: "https://github.com/kivra/oauth2", "8d129fbf8866930b4ffa6dd84e65bd2b32b9acb8"},
-     {:xmlrpc, git: "https://github.com/rds13/xmlrpc.git", tag: "1.15"},
      {:p1_mysql, git: "https://github.com/processone/mysql", tag: "1.0.0"},
      {:p1_pgsql, git: "https://github.com/processone/pgsql", tag: "1.0.0"},
      {:sqlite3, git: "https://github.com/alexeyr/erlang-sqlite3", "cbc3505f7a131254265d3ef56191b2581b8cc172"},
