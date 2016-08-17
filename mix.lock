@@ -20,7 +20,6 @@
   "p1_oauth2": {:hex, :p1_oauth2, "0.6.1", "4e021250cc198c538b097393671a41e7cebf463c248980320e038fe0316eb56b", [:rebar3], []},
   "p1_pgsql": {:hex, :p1_pgsql, "1.1.0", "ca525c42878eac095e5feb19563acc9915c845648f48fdec7ba6266c625d4ac7", [:rebar3], []},
   "p1_utils": {:hex, :p1_utils, "1.0.4", "7face65db102b5d1ebe7ad3c7517c5ee8cfbe174c6658e3affbb00eb66e06787", [:rebar3], []},
-  "p1_xmlrpc": {:hex, :p1_xmlrpc, "1.15.1", "a382b62dc21bb372281c2488f99294d84f2b4020ed0908a1c4ad710ace3cf35a", [:rebar3], []},
   "providers": {:hex, :providers, "1.6.0", "db0e2f9043ae60c0155205fcd238d68516331d0e5146155e33d1e79dc452964a", [:rebar3], [{:getopt, "0.8.2", [hex: :getopt, optional: false]}]},
   "relx": {:hex, :relx, "3.19.0", "286dd5244b4786f56aac75d5c8e2d1fb4cfd306810d4ec8548f3ae1b3aadb8f7", [:rebar3], [{:bbmustache, "1.0.4", [hex: :bbmustache, optional: false]}, {:cf, "0.2.1", [hex: :cf, optional: false]}, {:erlware_commons, "0.19.0", [hex: :erlware_commons, optional: false]}, {:getopt, "0.8.2", [hex: :getopt, optional: false]}, {:providers, "1.6.0", [hex: :providers, optional: false]}]},
   "samerlib": {:git, "https://github.com/processone/samerlib", "9158f65d18ec63f8b409543b6fb46dd5fce46160", [tag: "0.8.0b"]},
